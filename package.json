@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chardet": "^1.2.1",
     "chokidar": "^3.4.0",
+    "encoding-japanese": "^1.0.30",
+    "jschardet": "^2.2.1",
     "replace-in-file": "^6.1.0"
   }
 }
