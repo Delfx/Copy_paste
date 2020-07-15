@@ -2,6 +2,7 @@ const chokidar = require('chokidar');
 const fs = require('fs');
 const nodepath = require('path');
 const replace = require('replace-in-file');
+const encoding = require('encoding-japanese');
 
 const watcher = chokidar.watch('Z:\\Daily playlist 2019\\', {
     ignored: /(^|[\/\\])\../, // ignore dotfiles
@@ -15,14 +16,21 @@ watcher
     .on('change', path => {
 
         const filename = nodepath.basename(path)
-        const copyFileLocation = 'Z:\\Daily_playlist\\'+filename;
+        const copyFileLocation = 'Z:\\Daily_playlist\\' + filename;
+        const fileBuffer = fs.readFileSync(copyFileLocation);
+        const encoderName = encoding.detect(fileBuffer)
+        let encodingToOptions = 'utf16le'
 
         fs.copyFile(path, copyFileLocation, (err) => {
             if (err) throw err;
 
+            if (encoderName === 'SJIS') {
+                encodingToOptions = 'ascii'
+            }
+
             const options = {
                 files: copyFileLocation,
-                encoding: 'utf16le',
+                encoding: encodingToOptions,
                 from: /"E:\\/g,
                 to: '"\\\\Pbneo-500-0719\\e\\',
             };
