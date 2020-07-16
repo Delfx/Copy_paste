@@ -28,8 +28,7 @@ watcher
         const encoderName = encoding.detect(fileBuffer)
         let encodingToOptions = 'utf16le'
 
-            if (err) throw err;
-
+           
             if (encoderName === 'SJIS') {
                 encodingToOptions = 'ascii'
             }
