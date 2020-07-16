@@ -12,16 +12,22 @@ const watcher = chokidar.watch('Z:\\Daily playlist 2019\\', {
 
 const log = console.log.bind(console);
 
-watcher
-    .on('change', path => {
 
-        const filename = nodepath.basename(path)
+
+
+
+watcher
+    .on('change',  path => {
+
+        const filename = nodepath.basename(path);
         const copyFileLocation = 'Z:\\Daily_playlist\\' + filename;
+
+        fs.copyFile(path, copyFileLocation,  (err) => {
+            
         const fileBuffer = fs.readFileSync(copyFileLocation);
         const encoderName = encoding.detect(fileBuffer)
         let encodingToOptions = 'utf16le'
 
-        fs.copyFile(path, copyFileLocation, (err) => {
             if (err) throw err;
 
             if (encoderName === 'SJIS') {
