@@ -47,9 +47,6 @@ watcher
                 .catch(error => {
                     console.error('Error occurred:', error);
                 });
-
-
-            console.log('source.txt was copied to destination.txt');
         });
 
 
